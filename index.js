@@ -6,6 +6,7 @@ app.use(cors());
 app.listen(4000, () => {
     console.log('Server Works !!! At port 4000');
 });
+app.use(express.static('public'));
 app.get('/download', (req,res) => {
 var URL = req.query.URL;
 res.header('Content-Disposition', 'attachment; filename="video.mp4"');
