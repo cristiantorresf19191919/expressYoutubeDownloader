@@ -199,7 +199,7 @@
       padding-left: 5px;
       font-size: 1.5rem;
     }
-    .download-button {
+    .download-button, .download-button-mp3 {
       position: absolute;
       bottom: -6rem;
       left: 50%;
@@ -207,11 +207,15 @@
       background: transparent;
       color: white;
       border: none;
-      font-size: 2rem;
+      font-size: 1.4rem;
       cursor: pointer;
       border-radius: 10px;
       border-style: inset;
       padding: 7px;
+    }
+
+    .download-button-mp3{
+      bottom: -10rem;
     }
 
     @keyframes youtubeAnim {
@@ -252,8 +256,12 @@
         data-intro="Pega el link de youtube aqui"
         placeholder="https://www.youtube.com/..."
       />
+
       <button class="download-button">
         Descargar <i class="fas fa-download"></i>
+      </button> <br>
+      <button class="download-button-mp3">
+        mp3 <i class="fas fa-music"></i>
       </button>
     </div>
 
@@ -270,16 +278,26 @@
     <script>
       var convertBtn = document.querySelector(".btn-search");
       var downloadBtn = document.querySelector(".download-button");
+      var downloadMp3 = document.querySelector(".download-button-mp3");
       var URLinput = document.querySelector(".input-search");
       const fetchRequest = () => {
         console.log(`URL: ${URLinput.value}`);
         sendURL(URLinput.value);
         URLinput.value = "";
       };
+      const downloadMp3 = () => {
+        sendUrlMp3(URLinput.value);
+        URLinput.value = "";
+      }
+      downloadMp3.addEventListener("click",downloadMp3);
       downloadBtn.addEventListener("click", fetchRequest);
       convertBtn.addEventListener("click", fetchRequest);
       function sendURL(URL) {
         window.location.href = `https://video-downloader-cristianscrip.herokuapp.com/download?URL=${URL}`;
+      }
+      function sendUrlMp3(URL){
+        window.location.href = `https://video-downloader-cristianscrip.herokuapp.com/mp3?URL=${URL}`;
+        
       }
     </script>
     <script

@@ -17,6 +17,17 @@ app.get("/download", (req, res) => {
     console.log("🚀 ~ file: index.js ~ line 16 ~ app.get ~ error", error);
   }
 });
+app.get("/mp3", (req, res) => {
+  try {
+    var URL = req.query.URL;
+    res.header("Content-Disposition", 'attachment; filename="video.mp4"');
+    ytdl(URL, {
+      format: "mp3",
+    }).pipe(res);
+  } catch (error) {
+    console.log("🚀 ~ file: index.js ~ line 16 ~ app.get ~ error", error);
+  }
+});
 
 app.listen(process.env.PORT || 3000, () => {
   console.log("Server Works !!! At port 4000");
