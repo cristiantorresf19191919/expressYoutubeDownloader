@@ -24,7 +24,13 @@
       content="https://metatags.io/assets/meta-tags-16a33a6a8531e519cc0936fbba0ad904e52d35f34a46c97a2c9f6f7dd7d336f2.png"
     />
     <link rel="stylesheet" href="responsive.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intro.js/4.3.0/introjs.min.css" integrity="sha512-YZO1kAqr8VPYJMaOgT4ZAIP4OeCuAWoZqgdvVYjeqyfieNWrUTzZrrxpgAdDrS7nV3sAVTKdP6MSKhqaMU5Q4g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/intro.js/4.3.0/introjs.min.css"
+      integrity="sha512-YZO1kAqr8VPYJMaOgT4ZAIP4OeCuAWoZqgdvVYjeqyfieNWrUTzZrrxpgAdDrS7nV3sAVTKdP6MSKhqaMU5Q4g=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
   </head>
   <style>
     * {
@@ -193,6 +199,20 @@
       padding-left: 5px;
       font-size: 1.5rem;
     }
+    .download-button {
+      position: absolute;
+      bottom: -6rem;
+      left: 50%;
+      transform: translateX(-50%);
+      background: transparent;
+      color: white;
+      border: none;
+      font-size: 2rem;
+      cursor: pointer;
+      border-radius: 10px;
+      border-style: inset;
+      padding: 7px;
+    }
 
     @keyframes youtubeAnim {
       0%,
@@ -232,6 +252,9 @@
         data-intro="Pega el link de youtube aqui"
         placeholder="https://www.youtube.com/..."
       />
+      <button class="download-button">
+        Descargar <i class="fas fa-download"></i>
+      </button>
     </div>
 
     <footer>
@@ -246,12 +269,15 @@
 
     <script>
       var convertBtn = document.querySelector(".btn-search");
+      var downloadBtn = document.querySelector(".download-button");
       var URLinput = document.querySelector(".input-search");
-      convertBtn.addEventListener("click", () => {
+      const fetchRequest = () => {
         console.log(`URL: ${URLinput.value}`);
         sendURL(URLinput.value);
         URLinput.value = "";
-      });
+      };
+      downloadBtn.addEventListener("click", fetchRequest);
+      convertBtn.addEventListener("click", fetchRequest);
       function sendURL(URL) {
         window.location.href = `https://video-downloader-cristianscrip.herokuapp.com/download?URL=${URL}`;
       }
@@ -264,26 +290,30 @@
     ></script>
     <script>
       setTimeout(() => {
-         introJs().setOptions({
-           steps:[{
-             title:'Bienvenido',
-             intro:'Descarga videos de youtube facil'
-           },
-           {
-             title:'Paso 1',
-             element:document.querySelector(".input-search"),
-             intro:'Pega el link de youtube <b> aqui </b>'
-           },
-           {
-             title:"Paso 2",
-             element:document.querySelector(".btn-search"),
-             intro:'Presiona <b>aca</b> para descargar tu video <img width="33" height="33" src="https://th.bing.com/th/id/OIP.Y9COKMQqkN_C_i0LHHqwDAHaFP?w=255&h=180&c=7&r=0&o=5&pid=1.7" />'
-           }],
-           showProgress: true,
-           showBullets: false,
-           disableInteraction: true,
-         })
-         .start(); 
+        introJs()
+          .setOptions({
+            steps: [
+              {
+                title: "Bienvenido",
+                intro: "Descarga videos de youtube facil",
+              },
+              {
+                title: "Paso 1",
+                element: document.querySelector(".input-search"),
+                intro: "Pega el link de youtube <b> aqui </b>",
+              },
+              {
+                title: "Paso 2",
+                element: document.querySelector(".download-button"),
+                intro:
+                  'Presiona <b>aca</b> para descargar tu video <img width="33" height="33" src="https://th.bing.com/th/id/OIP.Y9COKMQqkN_C_i0LHHqwDAHaFP?w=255&h=180&c=7&r=0&o=5&pid=1.7" />',
+              },
+            ],
+            showProgress: true,
+            showBullets: false,
+            disableInteraction: true,
+          })
+          .start();
       }, 2000);
     </script>
   </body>
