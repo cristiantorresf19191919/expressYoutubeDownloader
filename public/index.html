@@ -9,7 +9,7 @@
     <meta name="keywords" content="whatsapp,mensajes,url" />
     <meta name="robots" content="index, follow" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
     <meta name="language" content="English" />
     <meta name="author" content="cristian torres" />
     <link
@@ -23,7 +23,8 @@
       property="og:image"
       content="https://metatags.io/assets/meta-tags-16a33a6a8531e519cc0936fbba0ad904e52d35f34a46c97a2c9f6f7dd7d336f2.png"
     />
-    <link rel="stylesheet" href="responsive.css">
+    <link rel="stylesheet" href="responsive.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intro.js/4.3.0/introjs.min.css" integrity="sha512-YZO1kAqr8VPYJMaOgT4ZAIP4OeCuAWoZqgdvVYjeqyfieNWrUTzZrrxpgAdDrS7nV3sAVTKdP6MSKhqaMU5Q4g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   </head>
   <style>
     * {
@@ -215,10 +216,20 @@
       </a>
     </div>
     <div class="search-box">
-      <button class="btn-search"><i class="fas fa-search"></i></button>
+      <button
+        data-title="paso 2"
+        data-intro="Presiona aca para descargar tu video"
+        data-step="2"
+        class="btn-search"
+      >
+        <i class="fas fa-search"></i>
+      </button>
       <input
         type="text"
         class="input-search"
+        data-title="Paso 1"
+        data-step="1"
+        data-intro="Pega el link de youtube aqui"
         placeholder="https://www.youtube.com/..."
       />
     </div>
@@ -244,6 +255,36 @@
       function sendURL(URL) {
         window.location.href = `https://video-downloader-cristianscrip.herokuapp.com/download?URL=${URL}`;
       }
+    </script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/intro.js/4.3.0/intro.min.js"
+      integrity="sha512-WYNEDpX7FCz0ejmdUFl444n+v7gDgDFYmxy2YBx99v15UUk3zU5ZWYFBXFCvWYvd+nv/guwUnXmrecK7Ee0Wtg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script>
+      setTimeout(() => {
+         introJs().setOptions({
+           steps:[{
+             title:'Bienvenido',
+             intro:'Descarga videos de youtube facil'
+           },
+           {
+             title:'Paso 1',
+             element:document.querySelector(".input-search"),
+             intro:'Pega el link de youtube <b> aqui </b>'
+           },
+           {
+             title:"Paso 2",
+             element:document.querySelector(".btn-search"),
+             intro:'Presiona aca para descargar tu video <br> <img src="https://th.bing.com/th/id/OIP.Y9COKMQqkN_C_i0LHHqwDAHaFP?w=255&h=180&c=7&r=0&o=5&pid=1.7" />'
+           }],
+           showProgress: true,
+           showBullets: false,
+           disableInteraction: true,
+         })
+         .start(); 
+      }, 2000);
     </script>
   </body>
 </html>
