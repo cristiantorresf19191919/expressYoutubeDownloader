@@ -199,11 +199,30 @@
       padding-left: 5px;
       font-size: 1.5rem;
     }
-    .download-button, .download-button-mp3 {
-      position: absolute;
-      bottom: -6rem;
-      left: 50%;
-      transform: translateX(-50%);
+    .button-actions{
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      margin-top: 2rem;
+    }
+    .show-tutorial{
+      display: flex;
+      justify-content: center;
+      margin-top: 2rem;
+      gap: .5rem;
+      cursor: pointer;
+  
+    }
+    .show-tutorial i{
+      color: white;
+      fill: white;
+    }
+    .show-tutorial a{
+      color: white;
+      cursor: pointer;
+    }
+    .download-button,
+    .download-button-mp3 {
       background: transparent;
       color: white;
       border: none;
@@ -214,9 +233,7 @@
       padding: 7px;
     }
 
-    .download-button-mp3{
-      bottom: -10rem;
-    }
+    
 
     @keyframes youtubeAnim {
       0%,
@@ -256,13 +273,19 @@
         data-intro="Pega el link de youtube aqui"
         placeholder="https://www.youtube.com/..."
       />
-
-      <button class="download-button">
-        Descargar <i class="fas fa-download"></i>
-      </button> <br>
-      <button class="download-button-mp3">
-        mp3 <i class="fas fa-music"></i>
-      </button>
+      <div class="button-actions">
+        <button class="download-button">
+          Descargar <i class="fas fa-download"></i>
+        </button>
+        <br />
+        <button class="download-button-mp3">
+          mp3 <i class="fas fa-music"></i>
+        </button>
+      </div>
+      <div class="show-tutorial" onclick="showTutorial()">
+        <a>Show Tutorial</a>
+        <i class="fas fa-graduation-cap"></i>
+      </div>
     </div>
 
     <footer>
@@ -288,16 +311,15 @@
       const downloadMp3Fn = () => {
         sendUrlMp3(URLinput.value);
         URLinput.value = "";
-      }
-      downloadMp3.addEventListener("click",downloadMp3Fn);
+      };
+      downloadMp3.addEventListener("click", downloadMp3Fn);
       downloadBtn.addEventListener("click", fetchRequest);
       convertBtn.addEventListener("click", fetchRequest);
       function sendURL(URL) {
         window.location.href = `https://video-downloader-cristianscrip.herokuapp.com/download?URL=${URL}`;
       }
-      function sendUrlMp3(URL){
+      function sendUrlMp3(URL) {
         window.location.href = `https://video-downloader-cristianscrip.herokuapp.com/mp3?URL=${URL}`;
-        
       }
     </script>
     <script
@@ -307,13 +329,22 @@
       referrerpolicy="no-referrer"
     ></script>
     <script>
+      function showTutorial(event){
+        localStorage.setItem("showWalkThru", "show");
+        // const {location:{reload}} = window;
+        window.location.reload();
+      }
       setTimeout(() => {
+        if (!localStorage.getItem("showWalkThru"))
+          localStorage.setItem("showWalkThru", "show");
+        if (localStorage.getItem("showWalkThru") === "false") return;
         introJs()
           .setOptions({
             steps: [
               {
                 title: "Bienvenido",
-                intro: "Descarga videos de youtube facil",
+                intro:
+                  "Descarga videos de youtube facil <br><br> <input type='checkbox' id='coolCheckBox'> <label style='cursor:pointer;' for='coolCheckBox'>No volver a mostrar</label>",
               },
               {
                 title: "Paso 1",
@@ -323,8 +354,12 @@
               {
                 title: "Paso 2",
                 element: document.querySelector(".download-button"),
-                intro:
-                  'Presiona <b>aca</b> para descargar tu video <img width="33" height="33" src="https://th.bing.com/th/id/OIP.Y9COKMQqkN_C_i0LHHqwDAHaFP?w=255&h=180&c=7&r=0&o=5&pid=1.7" />',
+                intro: "Presiona <b>aca</b> para descargar tu video 🎬",
+              },
+              {
+                title: "Opcional",
+                element: document.querySelector(".download-button-mp3"),
+                intro: "Presiona <b>aca</b> para convertir video a mp3 🎵🎵",
               },
             ],
             showProgress: true,
@@ -332,6 +367,14 @@
             disableInteraction: true,
           })
           .start();
+        const checkbox = document.querySelector("#coolCheckBox");
+        checkbox.addEventListener("change", (event) => {
+          if (event.currentTarget.checked) {
+            localStorage.setItem("showWalkThru", "false");
+          } else {
+            localStorage.setItem("showWalkThru", "show");
+          }
+        });
       }, 2000);
     </script>
   </body>

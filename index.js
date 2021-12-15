@@ -20,7 +20,7 @@ app.get("/download", (req, res) => {
 app.get("/mp3", (req, res) => {
   try {
     var URL = req.query.URL;
-    res.header("Content-Disposition", 'attachment; filename="video.mp4"');
+    res.header("Content-Disposition", 'attachment; filename="bailotealo.mp3"');
     ytdl(URL, {
       format: "mp3",
     }).pipe(res);
