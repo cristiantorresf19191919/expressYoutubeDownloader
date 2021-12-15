@@ -285,11 +285,11 @@
         sendURL(URLinput.value);
         URLinput.value = "";
       };
-      const downloadMp3 = () => {
+      const downloadMp3Fn = () => {
         sendUrlMp3(URLinput.value);
         URLinput.value = "";
       }
-      downloadMp3.addEventListener("click",downloadMp3);
+      downloadMp3.addEventListener("click",downloadMp3Fn);
       downloadBtn.addEventListener("click", fetchRequest);
       convertBtn.addEventListener("click", fetchRequest);
       function sendURL(URL) {
