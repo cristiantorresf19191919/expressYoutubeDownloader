@@ -33,215 +33,242 @@
     />
   </head>
   <style>
-    * {
-      box-sizing: border-box;
-    }
-    body {
-      margin: 0px;
-      padding: 0px;
-      width: 100vw;
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background-color: #130f40;
-      font-family: "Lato" !important;
-    }
-    .search-box {
-      width: fit-content;
-      height: fit-content;
-      position: relative;
-    }
-    .input-search {
-      height: 50px;
-      width: 50px;
-      border-style: none;
-      padding: 10px;
-      font-size: 18px;
-      letter-spacing: 2px;
-      outline: none;
-      border-radius: 25px;
-      transition: all 0.5s ease-in-out;
-      background-color: #22a6b3;
-      padding-right: 40px;
-      color: #fff;
-    }
-    .input-search::placeholder {
-      color: rgba(255, 255, 255, 0.5);
-      font-size: 18px;
-      letter-spacing: 2px;
-      font-weight: 100;
-    }
-    .btn-search {
-      width: 50px;
-      height: 50px;
-      border-style: none;
-      font-size: 20px;
-      font-weight: bold;
-      outline: none;
-      cursor: pointer;
-      border-radius: 50%;
-      position: absolute;
-      right: 0px;
-      color: #ffffff;
-      background-color: transparent;
-      pointer-events: painted;
-    }
-    .input-search {
-      transition: all 500ms cubic-bezier(0, 0.11, 0.35, 2);
-      animation-name: InputAnimation;
-      animation-duration: 500ms;
-      animation-timing-function: cubic-bezier(0, 0.11, 0.35, 2);
-      animation-delay: 1s;
-      animation-fill-mode: forwards;
-    }
-    @keyframes InputAnimation {
-      from {
+      * {
+        box-sizing: border-box;
       }
-      to {
-        width: 500px;
+      body {
+        margin: 0px;
+        padding: 0px;
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #130f40;
+        font-family: "Lato" !important;
+      }
+      .search-box {
+        width: fit-content;
+        height: fit-content;
+        position: relative;
+      }
+      .input-search {
+        height: 50px;
+        width: 50px;
+        border-style: none;
+        padding: 10px;
+        font-size: 18px;
+        letter-spacing: 2px;
+        outline: none;
+        border-radius: 25px;
+        transition: all 0.5s ease-in-out;
+        background-color: #22a6b3;
+        padding-right: 40px;
+        color: #fff;
+      }
+      .input-search::placeholder {
+        color: rgba(255, 255, 255, 0.5);
+        font-size: 18px;
+        letter-spacing: 2px;
+        font-weight: 100;
+      }
+      .btn-search {
+        width: 50px;
+        height: 50px;
+        border-style: none;
+        font-size: 20px;
+        font-weight: bold;
+        outline: none;
+        cursor: pointer;
+        border-radius: 50%;
+        position: absolute;
+        right: 0px;
+        color: #ffffff;
+        background-color: transparent;
+        pointer-events: painted;
+      }
+      .input-search {
+        transition: all 500ms cubic-bezier(0, 0.11, 0.35, 2);
+        animation-name: InputAnimation;
+        animation-duration: 500ms;
+        animation-timing-function: cubic-bezier(0, 0.11, 0.35, 2);
+        animation-delay: 1s;
+        animation-fill-mode: forwards;
+      }
+      @keyframes InputAnimation {
+        from {
+        }
+        to {
+          width: 500px;
+          border-radius: 0px;
+          background-color: transparent;
+          border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+        }
+      }
+      .btn-search:focus ~ .input-search {
+        width: 300px;
         border-radius: 0px;
         background-color: transparent;
         border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+        transition: all 500ms cubic-bezier(0, 0.11, 0.35, 2);
       }
-    }
-    .btn-search:focus ~ .input-search {
-      width: 300px;
-      border-radius: 0px;
-      background-color: transparent;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.5);
-      transition: all 500ms cubic-bezier(0, 0.11, 0.35, 2);
-    }
 
-    /*  footer   */
-    footer {
-      background-color: #222;
-      color: #fff;
-      font-size: 14px;
-      bottom: 0;
-      position: fixed;
-      left: 0;
-      right: 0;
-      text-align: center;
-      z-index: 999;
-    }
-
-    footer p {
-      margin: 10px 0;
-      font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida  Grande",
-        "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
-    }
-    footer .fa-heart {
-      color: red;
-    }
-    footer .fa-dev {
-      color: #fff;
-    }
-    footer .fa-twitter-square {
-      color: #1da0f1;
-    }
-    footer .fa-instagram {
-      color: #f0007c;
-    }
-    fotter .fa-linkedin {
-      color: #0073b1;
-    }
-    footer .fa-codepen {
-      color: #fff;
-    }
-    footer a {
-      color: #3c97bf;
-      text-decoration: none;
-      margin-right: 5px;
-    }
-    .youtubeBtn {
-      position: fixed;
-      left: 50%;
-      transform: translatex(-50%);
-      top: 45px;
-      cursor: pointer;
-      transition: all 0.3s;
-      vertical-align: middle;
-      text-align: center;
-      display: inline-block;
-    }
-    .youtubeBtn i {
-      font-size: 2rem;
-      float: left;
-      flex: 1;
-    }
-    .youtubeBtn a {
-      color: #ff0000;
-      animation: youtubeAnim 1000ms linear infinite;
-      float: right;
-      display: flex;
-      gap: 12px;
-      align-items: center;
-      text-decoration: none;
-    }
-    .youtubeBtn a:hover {
-      color: #c9110f;
-      transition: all 0.3s ease-in-out;
-      text-shadow: none;
-    }
-    .youtubeBtn i:active {
-      transform: scale(0.9);
-      transition: all 0.3s ease-in-out;
-    }
-    .youtubeBtn span {
-      font-family: "Lato";
-      font-weight: normal;
-      color: #fff;
-      display: block;
-      font-size: 12px;
-      float: right;
-      line-height: 20px;
-      padding-left: 5px;
-      font-size: 1.5rem;
-    }
-    .button-actions {
-      display: flex;
-      gap: 1rem;
-      justify-content: center;
-      margin-top: 2rem;
-    }
-    .show-tutorial {
-      display: flex;
-      justify-content: center;
-      margin-top: 2rem;
-      gap: 0.5rem;
-      cursor: pointer;
-    }
-    .show-tutorial i {
-      color: white;
-      fill: white;
-    }
-    .show-tutorial a {
-      color: white;
-      cursor: pointer;
-    }
-    .download-button,
-    .download-button-mp3 {
-      background: transparent;
-      color: white;
-      border: none;
-      font-size: 1.4rem;
-      cursor: pointer;
-      border-radius: 10px;
-      border-style: inset;
-      padding: 7px;
-    }
-
-    @keyframes youtubeAnim {
-      0%,
-      100% {
-        color: #c9110f;
+      /*  footer   */
+      footer {
+        background-color: #222;
+        color: #fff;
+        font-size: 14px;
+        bottom: 0;
+        position: fixed;
+        left: 0;
+        right: 0;
+        text-align: center;
+        z-index: 999;
       }
-      50% {
+
+      footer p {
+        margin: 10px 0;
+        font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida  Grande",
+          "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+      }
+      footer .fa-heart {
+        color: red;
+      }
+      footer .fa-dev {
+        color: #fff;
+      }
+      footer .fa-twitter-square {
+        color: #1da0f1;
+      }
+      footer .fa-instagram {
+        color: #f0007c;
+      }
+      fotter .fa-linkedin {
+        color: #0073b1;
+      }
+      footer .fa-codepen {
+        color: #fff;
+      }
+      footer a {
+        color: #3c97bf;
+        text-decoration: none;
+        margin-right: 5px;
+      }
+      .youtubeBtn {
+        position: fixed;
+        left: 50%;
+        transform: translatex(-50%);
+        top: 45px;
+        cursor: pointer;
+        transition: all 0.3s;
+        vertical-align: middle;
+        text-align: center;
+        display: inline-block;
+      }
+      .youtubeBtn i {
+        font-size: 2rem;
+        float: left;
+        flex: 1;
+      }
+      .youtubeBtn a {
         color: #ff0000;
+        animation: youtubeAnim 1000ms linear infinite;
+        float: right;
+        display: flex;
+        gap: 12px;
+        align-items: center;
+        text-decoration: none;
       }
+      .youtubeBtn a:hover {
+        color: #c9110f;
+        transition: all 0.3s ease-in-out;
+        text-shadow: none;
+      }
+      .youtubeBtn i:active {
+        transform: scale(0.9);
+        transition: all 0.3s ease-in-out;
+      }
+      .youtubeBtn span {
+        font-family: "Lato";
+        font-weight: normal;
+        color: #fff;
+        display: block;
+        font-size: 12px;
+        float: right;
+        line-height: 20px;
+        padding-left: 5px;
+        font-size: 1.5rem;
+      }
+      .button-actions {
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+        margin-top: 2rem;
+      }
+      .show-tutorial {
+        display: flex;
+        justify-content: center;
+        margin-top: 2rem;
+        gap: 0.5rem;
+        cursor: pointer;
+      }
+      .show-tutorial i {
+        color: white;
+        fill: white;
+      }
+      .show-tutorial a {
+        color: white;
+        cursor: pointer;
+      }
+      .download-button,
+      .download-button-mp3 {
+        background: transparent;
+        color: white;
+        border: none;
+        font-size: 1.4rem;
+        cursor: pointer;
+        border-radius: 10px;
+        border-style: inset;
+        padding: 7px;
+      }
+
+      @keyframes youtubeAnim {
+        0%,
+        100% {
+          color: #c9110f;
+        }
+        50% {
+          color: #ff0000;
+        }
+      }
+      .speaker-animation{
+        animation: soundCool 1000ms ease-in-out infinite;
+        cursor: pointer;
+      }
+      @keyframes soundCool {
+    0%, 20%, 53%, 80%, 100% {
+    -webkit-transition-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+    transition-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+    -webkit-transform: translate3d(0,0,0);
+    transform: translate3d(0,0,0);
     }
-    /* footer  */
+    40%, 43% {
+    -webkit-transition-timing-function: cubic-bezier(0.755, 0.050, 0.855, 0.060);
+    transition-timing-function: cubic-bezier(0.755, 0.050, 0.855, 0.060);
+    -webkit-transform: translate3d(0, -7px, 0);
+    transform: translate3d(0, -7px, 0);
+    }
+    70% {
+    -webkit-transition-timing-function: cubic-bezier(0.755, 0.050, 0.855, 0.060);
+    transition-timing-function: cubic-bezier(0.755, 0.050, 0.855, 0.060);
+    -webkit-transform: translate3d(0, -3.5px, 0);
+    transform: translate3d(0, -3.5px, 0);
+    }
+    90% { -webkit-transform: translate3d(0,-1px,0); transform: translate3d(0,-1px,0);
+    }
+    }
+      }
+      /* footer  */
   </style>
   <body>
     <div class="youtubeBtn">
@@ -300,13 +327,37 @@
       var downloadBtn = document.querySelector(".download-button");
       var downloadMp3 = document.querySelector(".download-button-mp3");
       var URLinput = document.querySelector(".input-search");
-      function createIframeYoutube() {
+      function deleteIframes(){
         var iframes = document.querySelectorAll("iframe");
-        if (iframes.length){
+        if (iframes.length) {
           for (var i = 0; i < iframes.length; i++) {
             iframes[i].parentNode.removeChild(iframes[i]);
           }
         }
+      }
+      function deleteSpeakers(){
+        const speakersList = document.querySelectorAll(".speaker-animation");
+        if (speakersList.length) {
+          for (var i = 0; i < speakersList.length; i++) {
+            speakersList[i].parentNode.removeChild(speakersList[i]);
+          }
+        }
+      }
+      function createIframeYoutube() {
+        //<i class="fas fa-volume-up"></i>
+        deleteSpeakers();
+
+        const speakerIcon = document.createElement("i");
+        speakerIcon.classList.add("fas", "fa-volume-up", "speaker-animation");
+        speakerIcon.setAttribute("style", "color:white;");
+        speakerIcon.onclick = function() {
+          deleteSpeakers();
+          deleteIframes();
+        }
+        document.body.appendChild(speakerIcon);
+
+        deleteIframes();
+
         const IFRAME_CONFIG = {
           width: "560",
           height: "315",
@@ -344,6 +395,7 @@
       }
       function sendUrlMp3(URL) {
         window.location.href = `https://video-downloader-cristianscrip.herokuapp.com/mp3?URL=${URL}`;
+        // window.location.href = `http://localhost:3000/mp3?URL=${URL}`;
       }
     </script>
     <script
