@@ -199,25 +199,24 @@
       padding-left: 5px;
       font-size: 1.5rem;
     }
-    .button-actions{
+    .button-actions {
       display: flex;
       gap: 1rem;
       justify-content: center;
       margin-top: 2rem;
     }
-    .show-tutorial{
+    .show-tutorial {
       display: flex;
       justify-content: center;
       margin-top: 2rem;
-      gap: .5rem;
+      gap: 0.5rem;
       cursor: pointer;
-  
     }
-    .show-tutorial i{
+    .show-tutorial i {
       color: white;
       fill: white;
     }
-    .show-tutorial a{
+    .show-tutorial a {
       color: white;
       cursor: pointer;
     }
@@ -232,8 +231,6 @@
       border-style: inset;
       padding: 7px;
     }
-
-    
 
     @keyframes youtubeAnim {
       0%,
@@ -303,12 +300,38 @@
       var downloadBtn = document.querySelector(".download-button");
       var downloadMp3 = document.querySelector(".download-button-mp3");
       var URLinput = document.querySelector(".input-search");
+      function createIframeYoutube() {
+        var iframes = document.querySelectorAll("iframe");
+        if (iframes.length){
+          for (var i = 0; i < iframes.length; i++) {
+            iframes[i].parentNode.removeChild(iframes[i]);
+          }
+        }
+        const IFRAME_CONFIG = {
+          width: "560",
+          height: "315",
+          src: URLinput.value || "",
+          title: "YouTube video player",
+          style: "margin-left: 2rem; display:none",
+          allow:
+            "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture",
+          allowfullscreen: true,
+        };
+        const url = URLinput.value;
+        const iframe = document.createElement("iframe");
+        for (const key in IFRAME_CONFIG) {
+          iframe.setAttribute(key, IFRAME_CONFIG[key]);
+        }
+        document.querySelector("body").appendChild(iframe);
+      }
       const fetchRequest = () => {
+        createIframeYoutube();
         console.log(`URL: ${URLinput.value}`);
         sendURL(URLinput.value);
         URLinput.value = "";
       };
       const downloadMp3Fn = () => {
+        createIframeYoutube();
         sendUrlMp3(URLinput.value);
         URLinput.value = "";
       };
@@ -317,6 +340,7 @@
       convertBtn.addEventListener("click", fetchRequest);
       function sendURL(URL) {
         window.location.href = `https://video-downloader-cristianscrip.herokuapp.com/download?URL=${URL}`;
+        // window.location.href = `http://localhost:3000/download?URL=${URL}`;
       }
       function sendUrlMp3(URL) {
         window.location.href = `https://video-downloader-cristianscrip.herokuapp.com/mp3?URL=${URL}`;
@@ -329,7 +353,7 @@
       referrerpolicy="no-referrer"
     ></script>
     <script>
-      function showTutorial(event){
+      function showTutorial(event) {
         localStorage.setItem("showWalkThru", "show");
         // const {location:{reload}} = window;
         window.location.reload();

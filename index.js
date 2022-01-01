@@ -2,14 +2,20 @@ const express = require("express");
 const cors = require("cors");
 const ytdl = require("ytdl-core");
 const app = express();
+const got = require('got');
 
 app.use(cors());
 
 app.use(express.static("public"))
-app.get("/download", (req, res) => {
+app.get("/download", async (req, res) => {
   try {
     var URL = req.query.URL;
-    res.header("Content-Disposition", 'attachment; filename="video.mp4"');
+    console.log("boom over here");
+    const response = await got(`https://noembed.com/embed?url=${URL}`, { json: true });
+    const title = response?.body?.title;
+    const author = response?.body?.author_name;
+    console.log("hey over here 💟", response);
+    res.header("Content-Disposition", `attachment; filename="${title}-${author}.mp4"`);
     ytdl(URL, {
       format: "mp4",
     }).pipe(res);
@@ -17,10 +23,14 @@ app.get("/download", (req, res) => {
     console.log("🚀 ~ file: index.js ~ line 16 ~ app.get ~ error", error);
   }
 });
-app.get("/mp3", (req, res) => {
+app.get("/mp3", async (req, res) => {
   try {
     var URL = req.query.URL;
-    res.header("Content-Disposition", 'attachment; filename="bailotealo.mp3"');
+    const response = await got(`https://noembed.com/embed?url=${URL}`, { json: true });
+    const title = response?.body?.title;
+    const author = response?.body?.author_name;
+    console.log("hey over here 💟", response);
+    res.header("Content-Disposition", `attachment; filename="${title}-${author}.mp3"`);
     ytdl(URL, {
       format: "mp3",
     }).pipe(res);
@@ -30,5 +40,5 @@ app.get("/mp3", (req, res) => {
 });
 
 app.listen(process.env.PORT || 3000, () => {
-  console.log("Server Works !!! At port 4000");
+  console.log("Server Works !!! At port "+process.env.PORT || 3000);
 });
